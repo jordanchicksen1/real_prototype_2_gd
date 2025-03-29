@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class cameraMover : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool canMove = true;
+    public float cameraSpeed = 5f;
+    public Rigidbody2D rb;
+
+    public void Awake()
     {
-        
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FixedUpdate()
     {
+        if (canMove == true)
+        {
+            cameraSpeed = 85f;
+            rb.velocity = new Vector2(cameraSpeed, 0) * Time.deltaTime;
+        }
         
+        if (canMove == false)
+        {
+            cameraSpeed = 0;
+            rb.velocity = new Vector2(cameraSpeed, 0) * Time.deltaTime;
+        }
     }
 }
