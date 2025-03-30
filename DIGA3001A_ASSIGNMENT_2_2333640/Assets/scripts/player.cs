@@ -16,6 +16,8 @@ public class player : MonoBehaviour
     public float crouchSpeed = 1.5f; //short speed
     public bool isCrouching = false; //if short or normal
 
+    public GameObject bullet;
+    public Transform bulletSpawnPoint;
 
     private void OnEnable()
     {
@@ -69,6 +71,7 @@ public class player : MonoBehaviour
     public void Shoot()
     {
         Debug.Log("Player should shoot");
+        Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity); 
     }
     public void Boost()
     {
