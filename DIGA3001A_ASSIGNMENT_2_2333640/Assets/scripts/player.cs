@@ -87,7 +87,7 @@ public class player : MonoBehaviour
             boostParticles.Play();
             Debug.Log("player should boost");
             canBoost = false;
-            moveSpeed = moveSpeed * 2;
+            moveSpeed = moveSpeed * 2.5f;
             StartCoroutine(BoostTime());
             StartCoroutine(GiveBoostBack());
             boostBar.UseBoost();
@@ -119,7 +119,7 @@ public class player : MonoBehaviour
     public IEnumerator BoostTime()
     {
         yield return new WaitForSeconds(0.5f);
-        moveSpeed = moveSpeed / 2;
+        moveSpeed = moveSpeed / 2.5f;
     }
 
     public IEnumerator GiveBoostBack()
