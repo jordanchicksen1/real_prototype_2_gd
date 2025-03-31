@@ -12,7 +12,6 @@ public class player : MonoBehaviour
     public float moveSpeed = 8f; // Speed at which the player moves
     private Vector2 _moveInput; // Stores the movement input from the player
     private Vector3 _velocity; // Velocity of the player
-    public CharacterController _characterController; // Reference to the CharacterController component
     public float crouchSpeed = 1.5f; //short speed
     public bool isCrouching = false; //if short or normal
 
@@ -64,8 +63,8 @@ public class player : MonoBehaviour
         var currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
         // Move the character controller based on the movement vector and speed
-        _characterController.Move(move * currentSpeed * Time.deltaTime);
-
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = move * currentSpeed;
         Debug.Log("player should move");
     }
     public void Shoot()
