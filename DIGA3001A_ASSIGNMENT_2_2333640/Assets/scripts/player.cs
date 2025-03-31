@@ -22,6 +22,7 @@ public class player : MonoBehaviour
     //boosting
     public bool canBoost = true;
     public ParticleSystem boostParticles;
+    public boostBar boostBar;
 
     //health testing
     public playerHealth playerHealth;
@@ -88,7 +89,8 @@ public class player : MonoBehaviour
             canBoost = false;
             moveSpeed = moveSpeed * 2;
             StartCoroutine(BoostTime());
-            StartCoroutine(GiveBoostBack());    
+            StartCoroutine(GiveBoostBack());
+            boostBar.UseBoost();
         }
        
     }
@@ -108,6 +110,11 @@ public class player : MonoBehaviour
             Debug.Log("should decrease health");
             playerHealth.HitByProjectile();
         }
+
+        if(other.tag == "CameraKillBox")
+        {
+            playerHealth.currentHealth = 0f;
+        }
     }
     public IEnumerator BoostTime()
     {
@@ -117,7 +124,10 @@ public class player : MonoBehaviour
 
     public IEnumerator GiveBoostBack()
     {
+        yield return new WaitForSeconds(0.5f);
+        boostBar.shouldFillBar = true;
         yield return new WaitForSeconds(3f);
         canBoost = true;
+        boostBar.shouldFillBar = false;
     }
 }
