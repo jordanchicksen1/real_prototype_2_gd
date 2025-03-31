@@ -7,6 +7,7 @@ public class cameraMover : MonoBehaviour
     public bool canMove = true;
     public float cameraSpeed = 5f;
     public Rigidbody2D rb;
+    
 
     public void Awake()
     {
@@ -20,8 +21,9 @@ public class cameraMover : MonoBehaviour
             cameraSpeed = 85f;
             rb.velocity = new Vector2(cameraSpeed, 0) * Time.deltaTime;
         }
+
         
-        if (canMove == false)
+        if (canMove == false )
         {
             cameraSpeed = 0;
             rb.velocity = new Vector2(cameraSpeed, 0) * Time.deltaTime;

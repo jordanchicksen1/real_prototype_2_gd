@@ -8,7 +8,7 @@ public class playerHealth : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
     public Image healthBar;
-    public GameObject endScreen;
+    public GameObject gameOverScreen;
 
     public void Start()
     {
@@ -41,7 +41,7 @@ public class playerHealth : MonoBehaviour
     {
         if (currentHealth <= 0f)
         {
-            endScreen.SetActive(true);
+            gameOverScreen.SetActive(true);
         }
     }
 }

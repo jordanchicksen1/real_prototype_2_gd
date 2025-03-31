@@ -24,6 +24,15 @@ public class player : MonoBehaviour
     public ParticleSystem boostParticles;
     public boostBar boostBar;
 
+    //laser
+    public bool laserIsOut = false;
+    public GameObject laser;
+    public cameraMover cameraMover;
+
+    //pause stuff
+    public bool isPaused = false;
+    public GameObject pauseScreen;
+
     //health testing
     public playerHealth playerHealth;
     private void OnEnable()
@@ -62,18 +71,28 @@ public class player : MonoBehaviour
     }
     public void Move()
     {
-        // Create a movement vector based on the input
-        Vector2 move = new Vector2(_moveInput.x, _moveInput.y);
+        if(isPaused == false && laserIsOut == false)
+        {
+            // Create a movement vector based on the input
+            Vector2 move = new Vector2(_moveInput.x, _moveInput.y);
 
-        // Transform direction from local to world space
-        move = transform.TransformDirection(move);
+            // Transform direction from local to world space
+            move = transform.TransformDirection(move);
 
-        var currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
+            var currentSpeed = isCrouching ? crouchSpeed : moveSpeed;
 
-        // Move the character controller based on the movement vector and speed
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        rb.velocity = move * currentSpeed;
-        Debug.Log("player should move");
+            // Move the character controller based on the movement vector and speed
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.velocity = move * currentSpeed;
+            Debug.Log("player should move");
+
+            if (laserIsOut == true)
+            {
+                rb.velocity = Vector2.zero;
+            }
+        }
+       
+       
     }
     public void Shoot()
     {
@@ -97,10 +116,19 @@ public class player : MonoBehaviour
     public void Pause()
     {
         Debug.Log("game should pause");
+
     }
     public void Bomb()
     {
-        Debug.Log("player should shoot bomb");
+        if (laserIsOut == false)
+        {
+            Debug.Log("player should shoot bomb");
+            laserIsOut = true;
+            laser.SetActive(true);
+            cameraMover.canMove = false;
+            StartCoroutine(TurnOffLaser());
+        }
+        
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -129,5 +157,13 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(3f);
         canBoost = true;
         boostBar.shouldFillBar = false;
+    }
+
+    public IEnumerator TurnOffLaser()
+    {
+        yield return new WaitForSeconds(3f);
+        laserIsOut = false;
+        laser.SetActive(false);
+        cameraMover.canMove = true;
     }
 }
