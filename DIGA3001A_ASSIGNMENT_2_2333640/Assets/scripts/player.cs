@@ -15,9 +15,16 @@ public class player : MonoBehaviour
     public float crouchSpeed = 1.5f; //short speed
     public bool isCrouching = false; //if short or normal
 
+    //shooting
     public GameObject bullet;
     public Transform bulletSpawnPoint;
 
+    //boosting
+    public bool canBoost = true;
+    public ParticleSystem boostParticles;
+
+    //health testing
+    public playerHealth playerHealth;
     private void OnEnable()
     {
 
@@ -74,7 +81,16 @@ public class player : MonoBehaviour
     }
     public void Boost()
     {
-        Debug.Log("player should boost");
+        if(canBoost == true)
+        {
+            boostParticles.Play();
+            Debug.Log("player should boost");
+            canBoost = false;
+            moveSpeed = moveSpeed * 2;
+            StartCoroutine(BoostTime());
+            StartCoroutine(GiveBoostBack());    
+        }
+       
     }
     public void Pause()
     {
@@ -83,5 +99,25 @@ public class player : MonoBehaviour
     public void Bomb()
     {
         Debug.Log("player should shoot bomb");
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "healthTester")
+        {
+            Debug.Log("should decrease health");
+            playerHealth.HitByProjectile();
+        }
+    }
+    public IEnumerator BoostTime()
+    {
+        yield return new WaitForSeconds(0.5f);
+        moveSpeed = moveSpeed / 2;
+    }
+
+    public IEnumerator GiveBoostBack()
+    {
+        yield return new WaitForSeconds(3f);
+        canBoost = true;
     }
 }
