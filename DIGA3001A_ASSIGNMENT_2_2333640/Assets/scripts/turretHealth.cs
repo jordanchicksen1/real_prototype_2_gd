@@ -9,7 +9,6 @@ public class turretHealth : MonoBehaviour
     public float currentTurretHealth;
     public Image healthBar;
     public t turretParticles;
-
     public void Start()
     {
         currentTurretHealth = maxTurretHealth;
