@@ -38,6 +38,9 @@ public class player : MonoBehaviour
 
     //enemy stuff
     public List<turretShooter> shooterList;
+
+    //tension gauge stuff
+    public tensionPoints tensionPoints;
     private void OnEnable()
     {
 
@@ -50,8 +53,6 @@ public class player : MonoBehaviour
         // Subscribe to the movement input events
         playerInput.Player.Movement.performed += ctx => _moveInput = ctx.ReadValue<Vector2>(); // Update moveInput when movement input is performed
         playerInput.Player.Movement.canceled += ctx => _moveInput = Vector2.zero; // Reset moveInput when movement input is canceled
-
-        
 
         // Subscribe to the light fire input event
         playerInput.Player.Boost.performed += ctx => Boost(); // Call the PickUpObject method when pick-up input is performed
@@ -87,7 +88,7 @@ public class player : MonoBehaviour
             // Move the character controller based on the movement vector and speed
             Rigidbody2D rb = GetComponent<Rigidbody2D>();
             rb.velocity = move * currentSpeed;
-            Debug.Log("player should move");
+            
 
             if (laserIsOut == true)
             {
@@ -123,13 +124,14 @@ public class player : MonoBehaviour
     }
     public void Bomb()
     {
-        if (laserIsOut == false)
+        if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
         {
             Debug.Log("player should shoot bomb");
             laserIsOut = true;
             laser.SetActive(true);
             cameraMover.canMove = false;
             StartCoroutine(TurnOffLaser());
+            tensionPoints.UsingLaser();
         }
         
     }

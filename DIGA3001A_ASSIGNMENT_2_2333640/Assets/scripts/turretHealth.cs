@@ -9,6 +9,7 @@ public class turretHealth : MonoBehaviour
     public float currentTurretHealth;
     public Image healthBar;
     public t turretParticles;
+    public tensionPoints tensionPoints;
     public void Start()
     {
         currentTurretHealth = maxTurretHealth;
@@ -53,5 +54,6 @@ public class turretHealth : MonoBehaviour
         StartCoroutine(turretParticles.TheEffects());
         yield return new WaitForSeconds(0.1f);
         Destroy(this.gameObject);
+        tensionPoints.GainTension();
     }
 }

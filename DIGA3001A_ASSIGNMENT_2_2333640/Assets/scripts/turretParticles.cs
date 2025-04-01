@@ -10,7 +10,7 @@ public class t : MonoBehaviour
     {
         yield return new WaitForSeconds(0f);
         explosion.Play();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.01f);
         smoke.Play();
     }
 }
