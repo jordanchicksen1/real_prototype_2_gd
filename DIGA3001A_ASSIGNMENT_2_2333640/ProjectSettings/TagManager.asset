@@ -13,6 +13,9 @@ TagManager:
   - Turret
   - EnterEnemyRange
   - ExitEnemyRange
+  - Turret2
+  - TurretCannon
+  - TurretCannon2
   layers:
   - Default
   - TransparentFX

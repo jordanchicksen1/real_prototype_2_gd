@@ -32,4 +32,10 @@ public class turretShooter : MonoBehaviour
 
 
     }
+
+    public void StopShooterCorutine()
+    {
+        Debug.Log("hfhfhh");
+        StopCoroutine(Shooter());
+    }
 }
