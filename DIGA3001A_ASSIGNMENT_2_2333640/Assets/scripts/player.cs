@@ -150,7 +150,13 @@ public class player : MonoBehaviour
         if(other.tag == "EnterEnemyRange")
         {
             shooterList[0].StopShooterCorutine();
+            if (shooterList[0].gameObject == null)
+            {
+                Debug.Log("rrrrr");
+            }
             shooterList.RemoveAt(0);
+            
+            
             StartCoroutine(shooterList[0].Shooter());
         }
 
