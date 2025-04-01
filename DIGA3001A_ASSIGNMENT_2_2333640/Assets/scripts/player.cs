@@ -28,6 +28,7 @@ public class player : MonoBehaviour
     public bool laserIsOut = false;
     public GameObject laser;
     public cameraMover cameraMover;
+    public GameObject playerShip;
 
     //pause stuff
     public bool isPaused = false;
@@ -132,6 +133,8 @@ public class player : MonoBehaviour
             cameraMover.canMove = false;
             StartCoroutine(TurnOffLaser());
             tensionPoints.UsingLaser();
+            playerShip.GetComponent<Collider2D>().enabled = false;
+            
         }
         
     }
@@ -185,5 +188,6 @@ public class player : MonoBehaviour
         laserIsOut = false;
         laser.SetActive(false);
         cameraMover.canMove = true;
+        playerShip.GetComponent<Collider2D>().enabled = true;
     }
 }

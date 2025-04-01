@@ -41,11 +41,23 @@ public class turretHealth : MonoBehaviour
         updateTurretHealthBar();
     }
 
+    public void HitByLaser()
+    {
+        currentTurretHealth = currentTurretHealth - 100f;
+        updateTurretHealthBar();
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "GoodBullet")
         {
             HitByPlayerProjectile();
+        }
+
+        if(other.tag == "Laser")
+        {
+            HitByLaser();
+            Debug.Log("hit by laser");
         }
     }
 
