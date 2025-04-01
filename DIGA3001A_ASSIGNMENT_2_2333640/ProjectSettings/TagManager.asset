@@ -8,6 +8,9 @@ TagManager:
   - GoodBullet
   - healthTester
   - CameraKillBox
+  - Laser
+  - BadBullet
+  - Turret
   layers:
   - Default
   - TransparentFX
