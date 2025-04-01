@@ -11,6 +11,8 @@ TagManager:
   - Laser
   - BadBullet
   - Turret
+  - EnterEnemyRange
+  - ExitEnemyRange
   layers:
   - Default
   - TransparentFX

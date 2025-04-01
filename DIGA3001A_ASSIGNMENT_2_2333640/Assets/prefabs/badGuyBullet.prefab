@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3519494114759538873}
   - component: {fileID: 5153262709810371649}
   - component: {fileID: 3085128819134707075}
+  - component: {fileID: 3668605134238525864}
   m_Layer: 0
   m_Name: badGuyBullet
   m_TagString: BadBullet
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8092854093417435769}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.002715683, y: -0.0026587106, z: 0.69956654, w: 0.7145574}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -3.323568, y: -3.1337688, z: 0.0000000018115572}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.009, y: -0.435, z: 88.785}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &3519494114759538873
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e7a2f466b5a81bc4585eb26226d7f9ea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bb6fcccc70748f42b40724d68f4d7a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -115,12 +116,12 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.015829962, y: 0}
+  m_Offset: {x: -0.00086005515, y: 1.0252654e-10}
   serializedVersion: 2
-  m_Radius: 0.17908423
+  m_Radius: 0.08245974
 --- !u!50 &3085128819134707075
 Rigidbody2D:
   serializedVersion: 4
@@ -136,7 +137,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -148,3 +149,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3668605134238525864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8092854093417435769}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3047b7f5777fa71479e4422ec34f0bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpeed: 15

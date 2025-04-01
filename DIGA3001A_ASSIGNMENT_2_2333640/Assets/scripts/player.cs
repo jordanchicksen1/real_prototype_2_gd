@@ -35,6 +35,9 @@ public class player : MonoBehaviour
 
     //health testing
     public playerHealth playerHealth;
+
+    //enemy stuff
+    public turretShooter turretShooter;
     private void OnEnable()
     {
 
@@ -143,6 +146,27 @@ public class player : MonoBehaviour
         {
             playerHealth.currentHealth = 0f;
         }
+
+        if(other.tag == "EnterEnemyRange")
+        {
+            turretShooter.isInEnemyRange = true;
+            StartCoroutine(turretShooter.Shooter());
+            Debug.Log("should start turret");
+        }
+
+        if(other.tag == "ExitEnemyRange")
+        {
+            turretShooter.isInEnemyRange = false;
+            StopCoroutine(turretShooter.Shooter());
+            Debug.Log("should stop turret");
+        }
+
+        if(other.tag == "BadBullet")
+        {
+            playerHealth.HitByProjectile();
+        }
+
+
     }
     public IEnumerator BoostTime()
     {

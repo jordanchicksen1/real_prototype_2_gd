@@ -41,7 +41,7 @@ public class playerHealth : MonoBehaviour
     {
         if (currentHealth <= 0f)
         {
-            gameOverScreen.SetActive(true);
+            gameOverScreen  .SetActive(true);
         }
     }
 }
