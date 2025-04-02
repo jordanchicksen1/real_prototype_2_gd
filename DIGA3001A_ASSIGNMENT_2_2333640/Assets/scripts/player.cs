@@ -134,6 +134,7 @@ public class player : MonoBehaviour
             StartCoroutine(TurnOffLaser());
             tensionPoints.UsingLaser();
             playerShip.GetComponent<Collider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             
         }
         
@@ -189,5 +190,6 @@ public class player : MonoBehaviour
         laser.SetActive(false);
         cameraMover.canMove = true;
         playerShip.GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
     }
 }

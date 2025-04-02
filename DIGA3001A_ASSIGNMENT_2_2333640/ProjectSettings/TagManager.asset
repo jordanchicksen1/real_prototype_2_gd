@@ -16,6 +16,7 @@ TagManager:
   - Turret2
   - TurretCannon
   - TurretCannon2
+  - Jet
   layers:
   - Default
   - TransparentFX
