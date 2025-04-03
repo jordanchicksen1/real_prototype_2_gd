@@ -8,6 +8,6 @@ public class badGuyBullet : MonoBehaviour
     void Start()
     {
         
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, 1.5f);
     }
 }
