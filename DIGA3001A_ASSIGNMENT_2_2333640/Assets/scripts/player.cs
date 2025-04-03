@@ -49,6 +49,24 @@ public class player : MonoBehaviour
     //start cutscene stuff
     public bool isAtStart = true;
     public float cutsceneMoveSpeed = 6f;
+    public GameObject cutscene1;
+    public GameObject cutscene2;
+    public GameObject cutscene3;
+    public GameObject cutscene4;
+    public GameObject cutscene5;
+
+    public float missileSpeed = 5f;
+
+    public GameObject missile1;
+    public bool shootMissile1 = false;
+    public GameObject missile2;
+    public bool shootMissile2 = false;
+    public GameObject missile3;
+    public bool shootMissile3 = false;
+
+    public GameObject ship1;
+    public GameObject ship2;
+    public GameObject ship3;
     
     private void OnEnable()
     {
@@ -81,10 +99,35 @@ public class player : MonoBehaviour
 
     }
 
+    public void Start()
+    {
+        StartCoroutine(Cutscene());
+    }
     
     public void Update()
     {
         Move();
+
+        if(shootMissile1 == true) 
+        {
+            missile1.transform.position = Vector2.MoveTowards(missile1.transform.position, ship1.transform.position, missileSpeed);
+            Debug.Log("missile should fly into the ship 1");
+            //shootMissile1 = false;
+        }
+
+        if (shootMissile2 == true)
+        {
+            missile2.transform.position = Vector2.MoveTowards(missile2.transform.position, ship2.transform.position, missileSpeed);
+            Debug.Log("missile should fly into the ship 2");
+            //shootMissile1 = false;
+        }
+
+        if (shootMissile3 == true)
+        {
+            missile3.transform.position = Vector2.MoveTowards(missile3.transform.position, ship3.transform.position, missileSpeed);
+            Debug.Log("missile should fly into the ship 3");
+            //shootMissile1 = false;
+        }
     }
     public void Move()
     {
@@ -228,5 +271,33 @@ public class player : MonoBehaviour
         cameraMover.canMove = true;
         playerShip.GetComponent<Collider2D>().enabled = true;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+    }
+
+    public IEnumerator Cutscene()
+    {
+        yield return new WaitForSeconds(1.5f);
+        cutscene1.SetActive(true);
+        yield return new WaitForSeconds(9f);
+        cutscene1.SetActive(false);
+        cutscene2.SetActive(true);
+        yield return new WaitForSeconds(8f);
+        cutscene2.SetActive(false);
+        cutscene3.SetActive(true);
+        yield return new WaitForSeconds(11f);
+        cutscene3.SetActive(false);
+        cutscene4.SetActive(true);
+        yield return new WaitForSeconds(6.5f);
+        cutscene4.SetActive(false);
+        cutscene5.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        cutscene5.SetActive(false);
+        shootMissile1 = true;
+        yield return new WaitForSeconds(1.5f);
+        shootMissile3 = true;
+        yield return new WaitForSeconds(1.5f);
+        shootMissile2 = true;
+        
+
+
     }
 }

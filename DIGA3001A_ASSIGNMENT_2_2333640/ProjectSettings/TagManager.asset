@@ -22,6 +22,8 @@ TagManager:
   - Health
   - P4Ship
   - P3Ship
+  - Missile
+  - P2Ship
   layers:
   - Default
   - TransparentFX
