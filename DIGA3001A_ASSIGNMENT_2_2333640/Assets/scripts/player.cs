@@ -45,6 +45,11 @@ public class player : MonoBehaviour
 
     //regen stuff
     public regenManager regenManger;
+
+    //start cutscene stuff
+    public bool isAtStart = true;
+    public float cutsceneMoveSpeed = 6f;
+    
     private void OnEnable()
     {
 
@@ -76,13 +81,14 @@ public class player : MonoBehaviour
 
     }
 
+    
     public void Update()
     {
         Move();
     }
     public void Move()
     {
-        if(isPaused == false && laserIsOut == false)
+        if(isPaused == false && laserIsOut == false && playerHealth.isDead == false && isAtStart == false)
         {
             // Create a movement vector based on the input
             Vector2 move = new Vector2(_moveInput.x, _moveInput.y);
@@ -101,6 +107,12 @@ public class player : MonoBehaviour
             {
                 rb.velocity = Vector2.zero;
             }
+        }
+
+        if(isAtStart == true)
+        {
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            rb.velocity = new Vector2(cutsceneMoveSpeed, 0);
         }
        
        

@@ -66,7 +66,7 @@ public class playerHealth : MonoBehaviour
        // smoke.Play();
         isDead = true;
        // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3f);
         gameOverScreen.SetActive(true);
     }
 }
