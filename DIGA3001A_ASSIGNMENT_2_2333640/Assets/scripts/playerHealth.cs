@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,12 @@ public class playerHealth : MonoBehaviour
     public float currentHealth;
     public Image healthBar;
     public GameObject gameOverScreen;
+    public bool isDead = false;
+    //public Rigidbody2D player;
+    public ParticleSystem explosion;
+    public ParticleSystem smoke;
+    public GameObject shipWorking;
+    public GameObject shipBroken;
 
     public void Start()
     {
@@ -47,7 +54,19 @@ public class playerHealth : MonoBehaviour
     {
         if (currentHealth <= 0f)
         {
-            gameOverScreen  .SetActive(true);
+            StartCoroutine(PlayerDeath());
         }
+    }
+
+    public IEnumerator PlayerDeath()
+    {
+        shipWorking.SetActive(false);
+        shipBroken.SetActive(true);
+        //explosion.Play();
+       // smoke.Play();
+        isDead = true;
+       // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(2.5f);
+        gameOverScreen.SetActive(true);
     }
 }
