@@ -71,6 +71,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseRegen"",
+                    ""type"": ""Button"",
+                    ""id"": ""03451dbd-3aeb-4352-ade1-4b034f46310b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -282,6 +291,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9339b0b2-8463-42be-ad83-ced431e3a891"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UseRegen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b6cd297-4d55-4092-952d-01d758209f30"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""UseRegen"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -318,6 +349,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Bomb = m_Player.FindAction("Bomb", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
+        m_Player_UseRegen = m_Player.FindAction("UseRegen", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -384,6 +416,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Bomb;
     private readonly InputAction m_Player_Pause;
+    private readonly InputAction m_Player_UseRegen;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
@@ -393,6 +426,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Bomb => m_Wrapper.m_Player_Bomb;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
+        public InputAction @UseRegen => m_Wrapper.m_Player_UseRegen;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -417,6 +451,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @UseRegen.started += instance.OnUseRegen;
+            @UseRegen.performed += instance.OnUseRegen;
+            @UseRegen.canceled += instance.OnUseRegen;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -436,6 +473,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @UseRegen.started -= instance.OnUseRegen;
+            @UseRegen.performed -= instance.OnUseRegen;
+            @UseRegen.canceled -= instance.OnUseRegen;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -478,5 +518,6 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnBoost(InputAction.CallbackContext context);
         void OnBomb(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnUseRegen(InputAction.CallbackContext context);
     }
 }

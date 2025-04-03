@@ -37,6 +37,12 @@ public class playerHealth : MonoBehaviour
         currentHealth = currentHealth - 20f;
         updateHealthBar() ;
     }
+
+    public void Regen()
+    {
+        currentHealth = currentHealth + 10f;
+        updateHealthBar();
+    }
     public void CheckHealth()
     {
         if (currentHealth <= 0f)

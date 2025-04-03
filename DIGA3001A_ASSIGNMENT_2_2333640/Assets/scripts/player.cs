@@ -42,6 +42,9 @@ public class player : MonoBehaviour
 
     //tension gauge stuff
     public tensionPoints tensionPoints;
+
+    //regen stuff
+    public regenManager regenManger;
     private void OnEnable()
     {
 
@@ -62,10 +65,13 @@ public class player : MonoBehaviour
         playerInput.Player.Shoot.performed += ctx => Shoot(); // sprint
 
         //Subscribe to the UseFuel
-        playerInput.Player.Bomb.performed += ctx => Bomb(); // use fuel
+        playerInput.Player.Bomb.performed += ctx => Bomb(); // use laser
+
+        //Subscribe to the UseFuel
+        playerInput.Player.UseRegen.performed += ctx => UseRegen(); // use fuel
 
         //Subscribe to the pause
-        playerInput.Player.Pause.performed += ctx => Pause(); // use fuel
+        playerInput.Player.Pause.performed += ctx => Pause(); // use pause
 
 
     }
@@ -123,6 +129,18 @@ public class player : MonoBehaviour
         Debug.Log("game should pause");
 
     }
+
+    public void UseRegen()
+    {
+        if(regenManger.regen > 0.99)
+        {
+            Debug.Log("should use a regen");
+            regenManger.subtractRegen();
+            playerHealth.Regen();
+        }
+        
+        
+    }
     public void Bomb()
     {
         if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
@@ -164,6 +182,13 @@ public class player : MonoBehaviour
         if(other.tag == "BadBullet")
         {
             playerHealth.HitByProjectile();
+        }
+
+        if(other.tag == "Health")
+        {
+            regenManger.addRegen();
+            Debug.Log("picked up regen");
+            Destroy(other.gameObject);
         }
 
 
