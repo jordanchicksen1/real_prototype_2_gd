@@ -17,6 +17,9 @@ TagManager:
   - TurretCannon
   - TurretCannon2
   - Jet
+  - Top
+  - Bottom
+  - Health
   layers:
   - Default
   - TransparentFX
