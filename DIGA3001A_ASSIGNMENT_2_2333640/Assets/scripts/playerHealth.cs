@@ -19,7 +19,8 @@ public class playerHealth : MonoBehaviour
 
     public void Start()
     {
-        currentHealth = maxHealth;
+        currentHealth = 90f;
+        updateHealthBar();
     }
 
     public void Update()

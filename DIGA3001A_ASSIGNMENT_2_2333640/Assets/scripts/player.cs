@@ -54,6 +54,9 @@ public class player : MonoBehaviour
     public GameObject cutscene3;
     public GameObject cutscene4;
     public GameObject cutscene5;
+    public GameObject cutscene6;
+    public GameObject cutscene7;
+    public GameObject cutsceneBorders;
 
     public float missileSpeed = 5f;
 
@@ -67,6 +70,23 @@ public class player : MonoBehaviour
     public GameObject ship1;
     public GameObject ship2;
     public GameObject ship3;
+
+    public GameObject titleScreen;
+    public GameObject presents;
+    public GameObject title;
+
+    public GameObject tutorial1;
+    public GameObject tutorial2;
+    public GameObject tutorial3;
+    public GameObject tutorial4;
+    public GameObject tutorial5;
+    public GameObject tutorial6;
+    public GameObject tutorial7;
+    
+    public GameObject playerUI;
+    public GameObject boostBarUI;
+    public GameObject regenUI;
+    public GameObject bigLaserUI;
     
     private void OnEnable()
     {
@@ -162,12 +182,15 @@ public class player : MonoBehaviour
     }
     public void Shoot()
     {
-        Debug.Log("Player should shoot");
-        Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity); 
+        if(isAtStart == false)
+        {
+            Debug.Log("Player should shoot");
+            Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
+        }
     }
     public void Boost()
     {
-        if(canBoost == true)
+        if(canBoost == true && isAtStart == false)
         {
             boostParticles.Play();
             Debug.Log("player should boost");
@@ -296,6 +319,58 @@ public class player : MonoBehaviour
         shootMissile3 = true;
         yield return new WaitForSeconds(1.5f);
         shootMissile2 = true;
+        yield return new WaitForSeconds(3f);
+        cutscene6.SetActive(true);
+        yield return new WaitForSeconds(4f);
+        cutscene6.SetActive(false);
+        cutscene7.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        cutsceneBorders.SetActive(false);
+        titleScreen.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        presents.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        presents.SetActive(false);
+        title.SetActive(true);
+        yield return new WaitForSeconds(3.5f);
+        titleScreen.SetActive(false);
+        isAtStart = false;
+
+        //tutorial
+        yield return new WaitForSeconds(2f);
+        tutorial1.SetActive(true);
+        playerUI.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        tutorial1.SetActive(false);
+        tutorial2.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        tutorial3.SetActive(true);
+        tutorial2.SetActive(false);
+        boostBarUI.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        tutorial3.SetActive(false);
+        tutorial4.SetActive(true);
+        regenUI.SetActive(true);
+
+        yield return new WaitForSeconds(7f);
+        tutorial4.SetActive(false);
+        tutorial5.SetActive(true);
+        bigLaserUI.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        tutorial5.SetActive(false);
+        tutorial6.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        tutorial6.SetActive(false);
+        tutorial7.SetActive(true);
+
+        yield return new WaitForSeconds(6f);
+        tutorial7.SetActive(false);
+
         
 
 
