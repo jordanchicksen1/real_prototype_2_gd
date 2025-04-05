@@ -17,6 +17,8 @@ public class playerHealth : MonoBehaviour
     public GameObject shipWorking;
     public GameObject shipBroken;
 
+    
+    
     public void Start()
     {
         currentHealth = 90f;
@@ -63,8 +65,8 @@ public class playerHealth : MonoBehaviour
     {
         shipWorking.SetActive(false);
         shipBroken.SetActive(true);
-        //explosion.Play();
-       // smoke.Play();
+         //explosion.Play();
+         // smoke.Play();
         isDead = true;
        // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(3f);

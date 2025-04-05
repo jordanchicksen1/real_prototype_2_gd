@@ -61,6 +61,9 @@ public class player : MonoBehaviour
     public GameObject cutscene7;
     public GameObject cutsceneBorders;
 
+    public AudioSource cutscene;
+
+    
     public float missileSpeed = 5f;
 
     public GameObject missile1;
@@ -90,6 +93,16 @@ public class player : MonoBehaviour
     public GameObject boostBarUI;
     public GameObject regenUI;
     public GameObject bigLaserUI;
+
+    //sounds
+    public AudioSource playerSFX;
+    public AudioClip shootSFX;
+    public AudioClip usingRegen;
+    public AudioClip playerHit;
+    public AudioClip pickUpRegen;
+    public AudioClip bigLaser;
+    public AudioClip boost;
+
     
     private void OnEnable()
     {
@@ -189,6 +202,8 @@ public class player : MonoBehaviour
         {
             Debug.Log("Player should shoot");
             Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
+            playerSFX.clip = shootSFX;
+            playerSFX.Play();
         }
     }
     public void Boost()
@@ -202,6 +217,8 @@ public class player : MonoBehaviour
             StartCoroutine(BoostTime());
             StartCoroutine(GiveBoostBack());
             boostBar.UseBoost();
+            playerSFX.clip = boost;
+            playerSFX.Play();
         }
        
     }
@@ -218,6 +235,8 @@ public class player : MonoBehaviour
             Debug.Log("should use a regen");
             regenManger.subtractRegen();
             playerHealth.Regen();
+            playerSFX.clip = usingRegen;
+            playerSFX .Play();
         }
         
         
@@ -235,6 +254,8 @@ public class player : MonoBehaviour
             tensionPoints.UsingLaser();
             playerShip.GetComponent<Collider2D>().enabled = false;
             GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            playerSFX.clip = bigLaser;
+            playerSFX .Play();
             
         }
         
@@ -253,17 +274,13 @@ public class player : MonoBehaviour
             playerHealth.currentHealth = 0f;
         }
 
-        //if(other.tag == "EnterEnemyRange")
-        //{
-           
-        //    shooterList.RemoveAt(0);
-        //    StartCoroutine(shooterList[0].Shooter());
-        //}
 
 
         if(other.tag == "BadBullet")
         {
             playerHealth.HitByProjectile();
+            playerSFX.clip = playerHit;
+            playerSFX .Play();
         }
 
         if(other.tag == "Health")
@@ -271,6 +288,9 @@ public class player : MonoBehaviour
             regenManger.addRegen();
             Debug.Log("picked up regen");
             Destroy(other.gameObject);
+            playerSFX.clip = pickUpRegen;
+            playerSFX .Play();
+
         }
 
 
@@ -305,18 +325,23 @@ public class player : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         cutscene1.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(9f);
         cutscene1.SetActive(false);
         cutscene2.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(8f);
         cutscene2.SetActive(false);
         cutscene3.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(11f);
         cutscene3.SetActive(false);
         cutscene4.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(6.5f);
         cutscene4.SetActive(false);
         cutscene5.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(2f);
         cutscene5.SetActive(false);
         shootMissile1 = true;
@@ -326,17 +351,22 @@ public class player : MonoBehaviour
         shootMissile2 = true;
         yield return new WaitForSeconds(3f);
         cutscene6.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(4f);
         cutscene6.SetActive(false);
         cutscene7.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(7f);
         cutsceneBorders.SetActive(false);
         titleScreen.SetActive(true);
+       
         yield return new WaitForSeconds(1.5f);
         presents.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(2f);
         presents.SetActive(false);
         title.SetActive(true);
+        cutscene.Play();
         yield return new WaitForSeconds(3.5f);
         titleScreen.SetActive(false);
         isAtStart = false;
@@ -345,33 +375,40 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(2f);
         tutorial1.SetActive(true);
         playerUI.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(6f);
         tutorial1.SetActive(false);
         tutorial2.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(6f);
         tutorial3.SetActive(true);
         tutorial2.SetActive(false);
         boostBarUI.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(6f);
         tutorial3.SetActive(false);
         tutorial4.SetActive(true);
         regenUI.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(7f);
         tutorial4.SetActive(false);
         tutorial5.SetActive(true);
         bigLaserUI.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(6f);
         tutorial5.SetActive(false);
         tutorial6.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(6f);
         tutorial6.SetActive(false);
         tutorial7.SetActive(true);
+        cutscene.Play();
 
         yield return new WaitForSeconds(6f);
         tutorial7.SetActive(false);
