@@ -29,6 +29,9 @@ public class player : MonoBehaviour
     public GameObject laser;
     public cameraMover cameraMover;
     public GameObject playerShip;
+    public Color newColour;
+    public Color oldColour;
+    public Camera playerCam;
 
     //pause stuff
     public bool isPaused = false;
@@ -227,6 +230,7 @@ public class player : MonoBehaviour
             laserIsOut = true;
             laser.SetActive(true);
             cameraMover.canMove = false;
+            playerCam.backgroundColor = newColour;
             StartCoroutine(TurnOffLaser());
             tensionPoints.UsingLaser();
             playerShip.GetComponent<Collider2D>().enabled = false;
@@ -294,6 +298,7 @@ public class player : MonoBehaviour
         cameraMover.canMove = true;
         playerShip.GetComponent<Collider2D>().enabled = true;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        playerCam.backgroundColor = oldColour;
     }
 
     public IEnumerator Cutscene()
