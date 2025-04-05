@@ -7,35 +7,33 @@ public class turretShooter : MonoBehaviour
     public GameObject badBullet;
     public Transform bulletSpawnPoint;
     public bool isInEnemyRange = false;
-    int timesShot;
+    public float timesShot;
     [SerializeField]
     private GameObject Player;
+    public float timePassed = 4;
 
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    public IEnumerator Shooter()
+    public void Update()
     {
-        if (timesShot < 4)
+        timesShot += Time.deltaTime;
+
+        if (timesShot > timePassed)
         {
-            timesShot++;
+            timesShot = 0;
             Vector3 Direction = (Player.transform.position - transform.position).normalized;
             GameObject Bullet = Instantiate(badBullet, bulletSpawnPoint.position, Quaternion.identity);
             Rigidbody2D rb = Bullet.GetComponent<Rigidbody2D>();
             rb.velocity = Direction * 15;
-            yield return new WaitForSeconds(2f);
-            StartCoroutine(Shooter());
+         
         }
 
 
 
     }
 
-    public void StopShooterCorutine()
-    {
-        Debug.Log("hfhfhh");
-        StopCoroutine(Shooter());
-    }
+   
 }

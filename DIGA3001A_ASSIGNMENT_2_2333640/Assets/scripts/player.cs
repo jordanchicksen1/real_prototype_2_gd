@@ -38,7 +38,7 @@ public class player : MonoBehaviour
     public playerHealth playerHealth;
 
     //enemy stuff
-    public List<turretShooter> shooterList;
+   // public List<turretShooter> shooterList;
 
     //tension gauge stuff
     public tensionPoints tensionPoints;
@@ -210,7 +210,7 @@ public class player : MonoBehaviour
 
     public void UseRegen()
     {
-        if(regenManger.regen > 0.99)
+        if(regenManger.regen > 0.99 && playerHealth.currentHealth < 100)
         {
             Debug.Log("should use a regen");
             regenManger.subtractRegen();
@@ -249,12 +249,12 @@ public class player : MonoBehaviour
             playerHealth.currentHealth = 0f;
         }
 
-        if(other.tag == "EnterEnemyRange")
-        {
+        //if(other.tag == "EnterEnemyRange")
+        //{
            
-            shooterList.RemoveAt(0);
-            StartCoroutine(shooterList[0].Shooter());
-        }
+        //    shooterList.RemoveAt(0);
+        //    StartCoroutine(shooterList[0].Shooter());
+        //}
 
 
         if(other.tag == "BadBullet")
