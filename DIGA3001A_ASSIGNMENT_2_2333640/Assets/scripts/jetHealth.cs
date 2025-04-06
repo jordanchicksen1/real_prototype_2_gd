@@ -11,6 +11,10 @@ public class jetHealth : MonoBehaviour
     public jetParticles jetParticles;
     public tensionPoints tensionPoints;
     public GameObject brokenJet;
+
+    public AudioSource jetAudio;
+    public AudioClip jetHit;
+    public AudioClip jetDeath;
     public void Start()
     {
         currentJetHealth = maxJetHealth;
@@ -40,6 +44,8 @@ public class jetHealth : MonoBehaviour
     {
         currentJetHealth = currentJetHealth - 20f;
         updateJetHealthBar();
+        jetAudio.clip = jetHit;
+        jetAudio.Play();
     }
 
     public void HitByLaser()
@@ -67,6 +73,8 @@ public class jetHealth : MonoBehaviour
         
         StartCoroutine(jetParticles.JetEffects());
         brokenJet.SetActive(true);
+        jetAudio.clip = jetDeath;
+        jetAudio.Play();
         yield return new WaitForSeconds(0.1f);
         Destroy(this.gameObject);
         tensionPoints.GainTension();

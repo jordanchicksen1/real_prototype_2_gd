@@ -9,6 +9,8 @@ public class jetShooter : MonoBehaviour
     public Transform bulletPoint;
     public float jBulletSpeed = 15;
 
+    public AudioSource jetAudio;
+    public AudioClip jetShoot;
     public void Update()
     {
         shootTime += Time.deltaTime;
@@ -19,6 +21,8 @@ public class jetShooter : MonoBehaviour
             GameObject jBullet = Instantiate(bullet, bulletPoint.position, Quaternion.identity);
             Rigidbody2D rb = jBullet.GetComponent<Rigidbody2D>();
             rb.velocity = transform.right * jBulletSpeed;
+            jetAudio.clip = jetShoot;
+            jetAudio.Play();
         }
     }
 }
