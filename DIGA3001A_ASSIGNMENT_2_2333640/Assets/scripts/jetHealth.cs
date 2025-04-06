@@ -59,6 +59,7 @@ public class jetHealth : MonoBehaviour
         if (other.tag == "GoodBullet")
         {
             HitByPlayerProjectile();
+            Destroy(other.gameObject);
         }
 
         if (other.tag == "Laser")

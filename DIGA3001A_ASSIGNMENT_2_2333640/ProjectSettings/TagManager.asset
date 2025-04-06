@@ -24,6 +24,9 @@ TagManager:
   - P3Ship
   - Missile
   - P2Ship
+  - FinalBoss
+  - BossStart
+  - BossMissile
   layers:
   - Default
   - TransparentFX

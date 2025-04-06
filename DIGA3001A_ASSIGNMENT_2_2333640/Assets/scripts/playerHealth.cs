@@ -18,6 +18,9 @@ public class playerHealth : MonoBehaviour
     public GameObject shipBroken;
 
     public GameObject playerSFX;
+
+    public bool isAtTheEnd = false;
+    public GameObject finalEndScreen;
     
     public void Start()
     {
@@ -48,6 +51,11 @@ public class playerHealth : MonoBehaviour
         updateHealthBar() ;
     }
 
+    public void HitByMissile()
+    {
+        currentHealth = currentHealth - 50f;
+        updateHealthBar();
+    }
     public void Regen()
     {
         currentHealth = currentHealth + 10f;
@@ -55,9 +63,14 @@ public class playerHealth : MonoBehaviour
     }
     public void CheckHealth()
     {
-        if (currentHealth <= 0f)
+        if (currentHealth <= 0f && isAtTheEnd == false)
         {
             StartCoroutine(PlayerDeath());
+        }
+
+        if (currentHealth <= 0f && isAtTheEnd == true)
+        {
+            StartCoroutine(TheEnd());
         }
     }
 
@@ -72,5 +85,18 @@ public class playerHealth : MonoBehaviour
        // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(3f);
         gameOverScreen.SetActive(true);
+    }
+
+    public IEnumerator TheEnd()
+    {
+        shipWorking.SetActive(false);
+        shipBroken.SetActive(true);
+        playerSFX.SetActive(false);
+        //explosion.Play();
+        // smoke.Play();
+        isDead = true;
+        // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        yield return new WaitForSeconds(3f);
+        finalEndScreen.SetActive(true);
     }
 }

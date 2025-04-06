@@ -109,7 +109,10 @@ public class player : MonoBehaviour
     public GameObject cutsceneSoundtrack;
     public GameObject levelSoundtrack;
 
-    
+    //boss fight
+    public GameObject bossMusic;
+    public GameObject bossUI;
+
     private void OnEnable()
     {
 
@@ -288,9 +291,18 @@ public class player : MonoBehaviour
             playerHealth.HitByProjectile();
             playerSFX.clip = playerHit;
             playerSFX .Play();
+            Destroy(other.gameObject);
         }
 
-        if(other.tag == "Health")
+        if (other.tag == "BossMissile")
+        {
+            playerHealth.HitByMissile();
+            playerSFX.clip = playerHit;
+            playerSFX.Play();
+            Destroy(other.gameObject);
+        }
+
+        if (other.tag == "Health")
         {
             regenManger.addRegen();
             Debug.Log("picked up regen");
@@ -299,6 +311,16 @@ public class player : MonoBehaviour
             playerSFX .Play();
 
         }
+
+        if(other.tag == "BossStart")
+        {
+            cameraMover.canMove = false;
+            bossMusic.SetActive(true);
+            levelSoundtrack.SetActive(false);
+            bossUI.SetActive(true);
+        }
+
+
 
 
     }
