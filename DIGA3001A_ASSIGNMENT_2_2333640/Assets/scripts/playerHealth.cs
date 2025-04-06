@@ -17,7 +17,7 @@ public class playerHealth : MonoBehaviour
     public GameObject shipWorking;
     public GameObject shipBroken;
 
-    
+    public GameObject playerSFX;
     
     public void Start()
     {
@@ -65,6 +65,7 @@ public class playerHealth : MonoBehaviour
     {
         shipWorking.SetActive(false);
         shipBroken.SetActive(true);
+        playerSFX.SetActive(false);
          //explosion.Play();
          // smoke.Play();
         isDead = true;

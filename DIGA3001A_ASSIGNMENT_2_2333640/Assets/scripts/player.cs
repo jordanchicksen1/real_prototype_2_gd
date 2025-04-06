@@ -48,6 +48,7 @@ public class player : MonoBehaviour
 
     //regen stuff
     public regenManager regenManger;
+    public ParticleSystem regenParticles;
 
     //start cutscene stuff
     public bool isAtStart = true;
@@ -102,6 +103,8 @@ public class player : MonoBehaviour
     public AudioClip pickUpRegen;
     public AudioClip bigLaser;
     public AudioClip boost;
+    public AudioClip titleSFX;
+    public AudioClip textAppearSFx;
 
     
     private void OnEnable()
@@ -237,6 +240,7 @@ public class player : MonoBehaviour
             playerHealth.Regen();
             playerSFX.clip = usingRegen;
             playerSFX .Play();
+            regenParticles.Play();
         }
         
         
@@ -366,6 +370,7 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(2f);
         presents.SetActive(false);
         title.SetActive(true);
+        cutscene.clip = titleSFX;
         cutscene.Play();
         yield return new WaitForSeconds(3.5f);
         titleScreen.SetActive(false);
@@ -375,6 +380,7 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(2f);
         tutorial1.SetActive(true);
         playerUI.SetActive(true);
+        cutscene.clip = textAppearSFx;
         cutscene.Play();
 
         yield return new WaitForSeconds(6f);

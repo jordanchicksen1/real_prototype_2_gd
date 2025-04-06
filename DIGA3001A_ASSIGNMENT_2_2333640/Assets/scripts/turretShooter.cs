@@ -12,6 +12,9 @@ public class turretShooter : MonoBehaviour
     private GameObject Player;
     public float timePassed = 4;
 
+    public AudioSource turretAudio;
+    public AudioClip turretShoot;
+
     private void Start()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -28,6 +31,8 @@ public class turretShooter : MonoBehaviour
             GameObject Bullet = Instantiate(badBullet, bulletSpawnPoint.position, Quaternion.identity);
             Rigidbody2D rb = Bullet.GetComponent<Rigidbody2D>();
             rb.velocity = Direction * 15;
+            turretAudio.clip = turretShoot;
+            turretAudio.Play();
          
         }
 

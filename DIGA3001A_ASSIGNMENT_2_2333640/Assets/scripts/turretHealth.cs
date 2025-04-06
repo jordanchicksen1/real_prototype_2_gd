@@ -10,6 +10,10 @@ public class turretHealth : MonoBehaviour
     public Image healthBar;
     public t turretParticles;
     public tensionPoints tensionPoints;
+
+    public AudioSource enemyAudio;
+    public AudioClip enemyHit;
+    public AudioClip enemyDeath;
     public void Start()
     {
         currentTurretHealth = maxTurretHealth;
@@ -39,12 +43,15 @@ public class turretHealth : MonoBehaviour
     {
         currentTurretHealth = currentTurretHealth - 20f;
         updateTurretHealthBar();
+        enemyAudio.clip = enemyHit;
+        enemyAudio.Play();
     }
 
     public void HitByLaser()
     {
         currentTurretHealth = currentTurretHealth - 100f;
         updateTurretHealthBar();
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -64,6 +71,8 @@ public class turretHealth : MonoBehaviour
     public IEnumerator TurretDeath()
     {
         StartCoroutine(turretParticles.TheEffects());
+        enemyAudio.clip = enemyDeath;
+        enemyAudio.Play();
         yield return new WaitForSeconds(0.1f);
         Destroy(this.gameObject);
         tensionPoints.GainTension();
