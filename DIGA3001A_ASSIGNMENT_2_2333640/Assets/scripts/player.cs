@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -105,6 +106,8 @@ public class player : MonoBehaviour
     public AudioClip boost;
     public AudioClip titleSFX;
     public AudioClip textAppearSFx;
+    public GameObject cutsceneSoundtrack;
+    public GameObject levelSoundtrack;
 
     
     private void OnEnable()
@@ -375,6 +378,8 @@ public class player : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         titleScreen.SetActive(false);
         isAtStart = false;
+        cutsceneSoundtrack.SetActive(false);
+        levelSoundtrack.SetActive(true);
 
         //tutorial
         yield return new WaitForSeconds(2f);
