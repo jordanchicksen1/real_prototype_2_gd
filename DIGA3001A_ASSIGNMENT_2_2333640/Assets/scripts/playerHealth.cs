@@ -53,7 +53,7 @@ public class playerHealth : MonoBehaviour
 
     public void HitByMissile()
     {
-        currentHealth = currentHealth - 50f;
+        currentHealth = currentHealth - 30f;
         updateHealthBar();
     }
     public void Regen()

@@ -15,7 +15,7 @@ public class bossNormalShooter : MonoBehaviour
     {
         shootTime += Time.deltaTime;
 
-        if (shootTime > 2)
+        if (shootTime > 3)
         {
             shootTime = 0;
             GameObject BossMissile = Instantiate(missile, missilePoint.position, Quaternion.identity);
