@@ -27,5 +27,10 @@ public class cameraStopper : MonoBehaviour
             bossShooting2.canShoot = true;
             bossNormalShooter.canShoot = true;
         }
+
+        if(playerHealth.isAtTheEnd == true) 
+        {
+            cameraMover.canMove = false;
+        }
     }
 }

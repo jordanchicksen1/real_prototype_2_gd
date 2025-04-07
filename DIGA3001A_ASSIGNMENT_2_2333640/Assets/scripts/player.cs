@@ -253,20 +253,42 @@ public class player : MonoBehaviour
     }
     public void Bomb()
     {
-        if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
+        if(cameraMover.canMove == true)
         {
-            Debug.Log("player should shoot bomb");
-            laserIsOut = true;
-            laser.SetActive(true);
-            cameraMover.canMove = false;
-            playerCam.backgroundColor = newColour;
-            StartCoroutine(TurnOffLaser());
-            tensionPoints.UsingLaser();
-            playerShip.GetComponent<Collider2D>().enabled = false;
-            GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            playerSFX.clip = bigLaser;
-            playerSFX .Play();
-            
+            if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
+            {
+                Debug.Log("player should shoot bomb");
+                laserIsOut = true;
+                laser.SetActive(true);
+                cameraMover.canMove = false;
+                playerCam.backgroundColor = newColour;
+                StartCoroutine(TurnOffLaser());
+                tensionPoints.UsingLaser();
+                playerShip.GetComponent<Collider2D>().enabled = false;
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                playerSFX.clip = bigLaser;
+                playerSFX.Play();
+
+            }
+        }
+        
+        if(cameraMover.canMove == false)
+        {
+            if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
+            {
+                Debug.Log("player should shoot bomb");
+                laserIsOut = true;
+                laser.SetActive(true);
+                cameraMover.canMove = false;
+                playerCam.backgroundColor = newColour;
+                StartCoroutine(TurnOffLaserCantMove());
+                tensionPoints.UsingLaser();
+                playerShip.GetComponent<Collider2D>().enabled = false;
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                playerSFX.clip = bigLaser;
+                playerSFX.Play();
+
+            }
         }
         
     }
@@ -345,6 +367,16 @@ public class player : MonoBehaviour
         laserIsOut = false;
         laser.SetActive(false);
         cameraMover.canMove = true;
+        playerShip.GetComponent<Collider2D>().enabled = true;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        playerCam.backgroundColor = oldColour;
+    }
+
+    public IEnumerator TurnOffLaserCantMove()
+    {
+        yield return new WaitForSeconds(3f);
+        laserIsOut = false;
+        laser.SetActive(false);
         playerShip.GetComponent<Collider2D>().enabled = true;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         playerCam.backgroundColor = oldColour;
