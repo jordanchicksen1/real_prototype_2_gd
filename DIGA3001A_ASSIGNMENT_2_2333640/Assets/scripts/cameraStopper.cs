@@ -12,6 +12,8 @@ public class cameraStopper : MonoBehaviour
 
     public playerHealth playerHealth;
     
+    public bossNormalShooter bossNormalShooter;
+    public bossShooting2 bossShooting2;
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "BossStart")
@@ -22,6 +24,8 @@ public class cameraStopper : MonoBehaviour
             levelSoundtrack.SetActive(false);
             cutsceneSoundtrack.SetActive(false);
             bossUI.SetActive(true);
+            bossShooting2.canShoot = true;
+            bossNormalShooter.canShoot = true;
         }
     }
 }

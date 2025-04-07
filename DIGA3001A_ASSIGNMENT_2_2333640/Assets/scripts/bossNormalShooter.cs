@@ -11,18 +11,24 @@ public class bossNormalShooter : MonoBehaviour
 
     public AudioSource bossAudio;
     public AudioClip bossShoot;
+
+    public bool canShoot = false;
     public void Update()
     {
-        shootTime += Time.deltaTime;
-
-        if (shootTime > 3)
+        if(canShoot == true)
         {
-            shootTime = 0;
-            GameObject BossMissile = Instantiate(missile, missilePoint.position, Quaternion.identity);
-            Rigidbody2D rb = BossMissile.GetComponent<Rigidbody2D>();
-            rb.velocity = -transform.right * missileSpeed;
-            bossAudio.clip = bossShoot;
-            bossAudio.Play();
+            shootTime += Time.deltaTime;
+
+            if (shootTime > 3)
+            {
+                shootTime = 0;
+                GameObject BossMissile = Instantiate(missile, missilePoint.position, Quaternion.identity);
+                Rigidbody2D rb = BossMissile.GetComponent<Rigidbody2D>();
+                rb.velocity = -transform.right * missileSpeed;
+                bossAudio.clip = bossShoot;
+                bossAudio.Play();
+            }
         }
+       
     }
 }
