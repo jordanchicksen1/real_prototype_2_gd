@@ -13,6 +13,9 @@ public class targetHealth : MonoBehaviour
 
     public AudioSource targetAudio;
     public AudioClip targetHit;
+    public AudioClip targetDeath;
+
+    public ParticleSystem targetParticles;
     
     public void Start()
     {
@@ -23,6 +26,9 @@ public class targetHealth : MonoBehaviour
         if (currentTargetHealth <= 0)
         {
             tensionPoints.GainTension();
+            targetParticles.Play();
+            targetAudio.clip = targetDeath;
+            targetAudio.Play();
             StartCoroutine(TargetDeath());
 
         }
