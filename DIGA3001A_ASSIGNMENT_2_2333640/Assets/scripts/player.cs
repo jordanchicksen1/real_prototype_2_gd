@@ -232,8 +232,21 @@ public class player : MonoBehaviour
     }
     public void Pause()
     {
-        Debug.Log("game should pause");
+        if (isPaused == false) 
+        {
+            Debug.Log("game should pause");
+            Time.timeScale = 0f;
+            pauseScreen.SetActive(true);
+            isPaused = true;
+        }
 
+        else if(isPaused == true)
+        {
+            Debug.Log("game should unpause");
+            Time.timeScale = 1f;
+            pauseScreen.SetActive(false);
+            isPaused = false;
+        }
     }
 
     public void UseRegen()
