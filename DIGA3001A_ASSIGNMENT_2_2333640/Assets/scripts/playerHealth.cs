@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +20,8 @@ public class playerHealth : MonoBehaviour
 
     public bool isAtTheEnd = false;
     public GameObject finalEndScreen;
+
+    public SpriteRenderer p1Ship;
     
     public void Start()
     {
@@ -49,12 +50,15 @@ public class playerHealth : MonoBehaviour
     {
         currentHealth = currentHealth - 20f;
         updateHealthBar() ;
+        StartCoroutine(ChangeColour());
+        
     }
 
     public void HitByMissile()
     {
         currentHealth = currentHealth - 30f;
         updateHealthBar();
+        StartCoroutine(ChangeColour());
     }
     public void Regen()
     {
@@ -98,5 +102,12 @@ public class playerHealth : MonoBehaviour
         // player.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         yield return new WaitForSeconds(3f);
         finalEndScreen.SetActive(true);
+    }
+
+    public IEnumerator ChangeColour()
+    {
+        p1Ship.color = Color.red;
+        yield return new WaitForSeconds(0.25f);
+        p1Ship.color = Color.white;
     }
 }

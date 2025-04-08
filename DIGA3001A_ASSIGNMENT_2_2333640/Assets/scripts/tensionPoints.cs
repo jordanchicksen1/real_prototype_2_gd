@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class tensionPoints : MonoBehaviour
 {
-    public float maxTension = 100f;
+    public float maxTension = 50f;
     public float currentTension;
     public Image tensionGauge;
 
@@ -41,7 +41,7 @@ public class tensionPoints : MonoBehaviour
 
     public void UsingLaser()
     {
-        currentTension = currentTension - 100f;
+        currentTension = currentTension - 50f;
         updateTensionGauge();
         Debug.Log("should deplete all tension");
     }

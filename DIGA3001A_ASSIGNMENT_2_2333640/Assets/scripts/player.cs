@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -255,7 +254,7 @@ public class player : MonoBehaviour
     {
         if(cameraMover.canMove == true)
         {
-            if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
+            if (laserIsOut == false && tensionPoints.currentTension > 49.9f)
             {
                 Debug.Log("player should shoot bomb");
                 laserIsOut = true;
@@ -274,7 +273,7 @@ public class player : MonoBehaviour
         
         if(cameraMover.canMove == false)
         {
-            if (laserIsOut == false && tensionPoints.currentTension > 99.9f)
+            if (laserIsOut == false && tensionPoints.currentTension > 49.9f)
             {
                 Debug.Log("player should shoot bomb");
                 laserIsOut = true;
