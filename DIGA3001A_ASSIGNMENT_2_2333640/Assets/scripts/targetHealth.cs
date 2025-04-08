@@ -22,6 +22,7 @@ public class targetHealth : MonoBehaviour
     {
         if (currentTargetHealth <= 0)
         {
+            tensionPoints.GainTension();
             StartCoroutine(TargetDeath());
 
         }
@@ -70,7 +71,7 @@ public class targetHealth : MonoBehaviour
 
     public IEnumerator TargetDeath()
     {
-        tensionPoints.GainTension();
+        
         yield return new WaitForSeconds(0.1f);
         Destroy(this.gameObject);
         

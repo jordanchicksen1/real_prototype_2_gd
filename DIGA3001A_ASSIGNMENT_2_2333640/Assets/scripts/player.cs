@@ -154,21 +154,21 @@ public class player : MonoBehaviour
 
         if(shootMissile1 == true) 
         {
-            missile1.transform.position = Vector2.MoveTowards(missile1.transform.position, ship1.transform.position, missileSpeed);
+            missile1.transform.position = Vector2.MoveTowards(missile1.transform.position, ship1.transform.position, missileSpeed) ;
             Debug.Log("missile should fly into the ship 1");
             //shootMissile1 = false;
         }
 
         if (shootMissile2 == true)
         {
-            missile2.transform.position = Vector2.MoveTowards(missile2.transform.position, ship2.transform.position, missileSpeed);
+            missile2.transform.position = Vector2.MoveTowards(missile2.transform.position, ship2.transform.position, missileSpeed) ;
             Debug.Log("missile should fly into the ship 2");
             //shootMissile1 = false;
         }
 
         if (shootMissile3 == true)
         {
-            missile3.transform.position = Vector2.MoveTowards(missile3.transform.position, ship3.transform.position, missileSpeed);
+            missile3.transform.position = Vector2.MoveTowards(missile3.transform.position, ship3.transform.position, missileSpeed) ;
             Debug.Log("missile should fly into the ship 3");
             //shootMissile1 = false;
         }
