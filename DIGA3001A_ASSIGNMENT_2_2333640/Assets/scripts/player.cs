@@ -112,6 +112,11 @@ public class player : MonoBehaviour
     public GameObject bossMusic;
     public GameObject bossUI;
 
+    public GameObject winScreen;
+    public GameObject winSoundtrack;
+
+    public bool canRunCoroutine = false;
+
     private void OnEnable()
     {
 
@@ -172,6 +177,12 @@ public class player : MonoBehaviour
             Debug.Log("missile should fly into the ship 3");
             //shootMissile1 = false;
         }
+        
+        if(canRunCoroutine == true)
+        {
+            StartCoroutine(Win());
+        }
+
     }
     public void Move()
     {
@@ -206,7 +217,7 @@ public class player : MonoBehaviour
     }
     public void Shoot()
     {
-        if(isAtStart == false)
+        if(isAtStart == false && laserIsOut == false)
         {
             Debug.Log("Player should shoot");
             Instantiate(bullet, bulletSpawnPoint.position, Quaternion.identity);
@@ -251,7 +262,7 @@ public class player : MonoBehaviour
 
     public void UseRegen()
     {
-        if(regenManger.regen > 0.99 && playerHealth.currentHealth < 100)
+        if(regenManger.regen > 0.99 && playerHealth.currentHealth < 100 && laserIsOut == false)
         {
             Debug.Log("should use a regen");
             regenManger.subtractRegen();
@@ -493,5 +504,13 @@ public class player : MonoBehaviour
         
 
 
+    }
+
+    public IEnumerator Win()
+    {
+        yield return new WaitForSeconds(3f);
+        bossMusic.SetActive(false);
+        winScreen.SetActive(true);
+        winSoundtrack.SetActive(true);
     }
 }

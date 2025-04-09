@@ -13,9 +13,11 @@ public class bossShooting2 : MonoBehaviour
     public AudioClip bossShoot;
 
     public bool canShoot = false;
+
+   
     public void Update()
     {
-        if (canShoot == true)
+        if (canShoot == true )
         {
             shootTime += Time.deltaTime;
 

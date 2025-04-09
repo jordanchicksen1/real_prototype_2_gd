@@ -15,13 +15,24 @@ public class bossHealth : MonoBehaviour
     public AudioSource bossAudio;
     public AudioClip bossHit;
     public AudioClip bossDeath;
+    public GameObject bossDefeated;
+
+    public bossNormalShooter bossNormalShooter;
+    public bossShooting2 bossShooting2;
+
+
+
+    public player player;
     public void Start()
     {
         currentBossHealth = maxBossHealth;
     }
     public void Update()
     {
-        
+        if(currentBossHealth <= 0f)
+        {
+            StartCoroutine(BossDeath());
+        }
     }
     public void updateBossHealth(float amount)
     {
@@ -38,15 +49,16 @@ public class bossHealth : MonoBehaviour
 
     public void HitByPlayerProjectile()
     {
-        currentBossHealth = currentBossHealth - 10f;
+        currentBossHealth = currentBossHealth - 20f;
         updateBossHealthBar();
+        tensionPoints.BossTension();
         bossAudio.clip = bossHit;
         bossAudio.Play();
     }
 
     public void HitByLaser()
     {
-        currentBossHealth = currentBossHealth - 100f;
+        currentBossHealth = currentBossHealth - 110f;
         updateBossHealthBar();
     }
 
@@ -65,16 +77,22 @@ public class bossHealth : MonoBehaviour
         }
     }
 
-    /*public IEnumerator BossDeath()
+    public IEnumerator BossDeath()
     {
 
-        StartCoroutine(jetParticles.JetEffects());
-        brokenJet.SetActive(true);
-        jetAudio.clip = jetDeath;
-        jetAudio.Play();
+       
+        bossDefeated.SetActive(true);
+        bossAudio.clip = bossDeath;
+        bossAudio.Play();
+        bossNormalShooter.canShoot = false;
+        bossShooting2.canShoot = false;
+        player.canRunCoroutine = true;
         yield return new WaitForSeconds(0.1f);
         Destroy(this.gameObject);
-        tensionPoints.GainTension();
+       
+       
 
-    }*/
+    }
+
+    
 }

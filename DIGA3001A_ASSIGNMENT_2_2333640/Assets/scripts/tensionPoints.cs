@@ -39,6 +39,17 @@ public class tensionPoints : MonoBehaviour
         
     }
 
+    public void BossTension()
+    {
+        if (currentTension < maxTension)
+        {
+            currentTension = currentTension + 5f;
+            updateTensionGauge();
+            Debug.Log("should increase tension by 10");
+        }
+
+    }
+
     public void UsingLaser()
     {
         currentTension = currentTension - 50f;
